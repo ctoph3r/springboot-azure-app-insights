@@ -61,9 +61,17 @@
 			        <image>
 					    <name>springboot-azure-insights:${project.version}</name>
 			            <builder>paketobuildpacks/builder-jammy-tiny</builder>
+			       <buildpacks>
+                        <buildpack>paketo-buildpacks/java</buildpack>
+                        <buildpack>gcr.io/paketo-buildpacks/azure-application-insights</buildpack>
+                    </buildpacks>
 			            <env>
                              <BP_JVM_JLINK_ENABLED>false</BP_JVM_JLINK_ENABLED>
                         </env>
+                        <bindings>
+							<binding>${project.basedir}/appinsights:/platform/bindings/application-insights</binding>	
+					    </bindings>
+                        
 			        </image>
 			        <docker>
                            <bindHostToBuilder>false</bindHostToBuilder>
